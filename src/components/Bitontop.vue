@@ -2,15 +2,19 @@
     <div class="content">
         <div class="send-eth">
             <h3>To Address</h3>
-            <input type="text" placeholder="0xaA2b80c171D18aF2343D7678ff15B0d6CF635964" v-model="toAddress" :class="{error: !toAddress || toAddress.length === 0}">
+            <input type="text" placeholder="0xaA2b80c171D18aF2343D7678ff15B0d6CF635964" v-model="toAddress"
+                   :class="{error: !toAddress || toAddress.length === 0}">
             <h3>Amount to Send</h3>
             <input type="number" placeholder="Amount" v-model="amount" min="0" :class="{error: !amount || amount <= 0}">
             <h3>Gas Price (Gwei)</h3>
-            <input type="number" placeholder="41" v-model="gasPrice" min="0" :class="{error: !gasPrice || gasPrice <= 0}">
+            <input type="number" placeholder="41" v-model="gasPrice" min="0"
+                   :class="{error: !gasPrice || gasPrice <= 0}">
             <h3>Gas Limit</h3>
-            <input type="number" placeholder="21000" v-model="gasLimit" min="0" :class="{error: !gasLimit || gasLimit <= 0}">
+            <input type="number" placeholder="21000" v-model="gasLimit" min="0"
+                   :class="{error: !gasLimit || gasLimit <= 0}">
             <h3>Data (optional)</h3>
-            <input type="text" placeholder="0x6d79657468657277616c6c65742e636f6d20697320746865206265737421" v-model="data">
+            <input type="text" placeholder="0x6d79657468657277616c6c65742e636f6d20697320746865206265737421"
+                   v-model="data">
             <button @click="generateTransaction">Generate Transaction</button>
             <h3 v-if="rawTransaction">Raw Transaction</h3>
             <pre v-if="rawTransaction">{{rawTransaction}}</pre>
@@ -24,7 +28,8 @@
             <h3>Account Balance</h3>
             <p>{{ethBalance}} ROPSTEN ETH</p>
             <h3>Transaction History</h3>
-            <p><a :href="'https://ropsten.etherscan.io/address/' + accountAddress" target="_blank">ROPSTEN ETH (https://ropsten.etherscan.io)</a></p>
+            <p><a :href="'https://ropsten.etherscan.io/address/' + accountAddress" target="_blank">ROPSTEN ETH
+                (https://ropsten.etherscan.io)</a></p>
         </div>
     </div>
 </template>
@@ -50,7 +55,7 @@
         },
         methods: {
             async generateTransaction() {
-                if (!this.toAddress || this.toAddress.length === 0 || !this.amount || this.amount <= 0 || this.gasPrice <= 0 || this.gasLimit <=0) {
+                if (!this.toAddress || this.toAddress.length === 0 || !this.amount || this.amount <= 0 || this.gasPrice <= 0 || this.gasLimit <= 0) {
                     alert('please check the fields')
                     return
                 }
@@ -84,7 +89,7 @@
         mounted: function () {
             if (typeof web3 !== 'undefined' && web3.currentProvider.isMetaMask) {
                 web3 = new Web3(web3.currentProvider)
-                web3.eth.getAccounts().then(async(accounts) => {
+                web3.eth.getAccounts().then(async (accounts) => {
                     this.accountAddress = accounts[0]
                     web3.eth.getBalance(this.accountAddress).then((res) => {
                         this.ethBalance = web3.utils.fromWei(res)
@@ -119,7 +124,7 @@
         margin-top: .5rem;
         margin-bottom: .5rem;
         &.error {
-             border-color: #f7b7b3;
+            border-color: #f7b7b3;
         }
     }
 
@@ -148,7 +153,7 @@
     .send-eth {
         display: inline-block;
         background-color: #fff;
-        box-shadow: 16px 16px 47px 2px rgba(0,0,0,.07);
+        box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
         padding: 1.5rem 2rem;
         min-height: 1.5rem;
         margin: 1rem 1rem 1rem auto;
@@ -160,7 +165,7 @@
     .account-info {
         display: inline-block;
         background-color: #fff;
-        box-shadow: 16px 16px 47px 2px rgba(0,0,0,.07);
+        box-shadow: 16px 16px 47px 2px rgba(0, 0, 0, .07);
         padding: 1.5rem 2rem;
         min-height: 1.5rem;
         margin: 1rem auto;
