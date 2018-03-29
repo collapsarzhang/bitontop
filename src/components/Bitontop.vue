@@ -66,15 +66,11 @@
 </template>
 
 <script>
-    import dropdown from 'vue-dropdowns/Dropdown'
     let Web3 = require('web3')
     let web3 = window.web3
     let abi = require('@/assets/abi.json')
     export default {
         name: 'Bitontop',
-        components: {
-            'dropdown': dropdown
-        },
         data() {
             return {
                 nonce: 0,
@@ -125,8 +121,7 @@
                     let contract = new web3.eth.Contract(abi, this.transferringToken.contractAddress, {
                         from: this.accountAddress
                     })
-                    let data = contract.methods.transfer(this.toAddress, web3.utils.toBN(this.amount).mul(web3.utils.toBN(10 ** this.transferringToken.decimals, 10))).encodeABI()
-                    // console.log(web3.utils.toBN(this.amount).mul(web3.utils.toBN(10 ** this.transferringToken.decimals, 10)).toString())
+                    let data = contract.methods.transfer(this.toAddress, this.amount * 1.0 * (10 ** this.transferringToken.decimals)).encodeABI()
                     this.rawTransaction = {
                         nonce: web3.utils.toHex(count),
                         gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei')),
@@ -165,7 +160,7 @@
                     from: this.accountAddress
                 })
                 contract.methods.balanceOf(this.accountAddress).call().then((result) => {
-                        let tokenCount = web3.utils.toBN(result).div(web3.utils.toBN(10 ** this.token.decimals, 10)).toString()
+                        let tokenCount = result * 1.0 / (10 ** this.token.decimals)
                         this.$set(this.token, 'amount', tokenCount)
                         this.token = {}
                 }).catch(console.error)
@@ -194,7 +189,7 @@
                             from: this.accountAddress
                         })
                         contract.methods.balanceOf(this.accountAddress).call().then((result) => {
-                            let tokenCount = web3.utils.toBN(result).div(web3.utils.toBN(10 ** token.decimals, 10)).toString()
+                            let tokenCount = result * 1.0 / (10 ** token.decimals)
                             this.$set(token, 'amount', tokenCount)
                         }).catch(console.error)
                     })
