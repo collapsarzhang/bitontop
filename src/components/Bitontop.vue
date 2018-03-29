@@ -119,7 +119,8 @@
                     }
                 } else {
                     let contract = new web3.eth.Contract(abi, this.transferringToken.contractAddress, {
-                        from: this.accountAddress
+                        from: this.accountAddress,
+                        gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei'))
                     })
                     let data = contract.methods.transfer(this.toAddress, this.amount * 1.0 * (10 ** this.transferringToken.decimals)).encodeABI()
                     this.rawTransaction = {
