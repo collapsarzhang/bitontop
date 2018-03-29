@@ -100,32 +100,32 @@
                 if (this.transferringToken.symbol === 'ETH') {
                     this.rawTransaction = {
                         nonce: web3.utils.toHex(count),
-                        gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei')),
+                        gasPrice: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.gasPrice), 'Gwei')),
                         gasLimit: web3.utils.toHex(this.gasLimit),
                         to: this.toAddress,
-                        value: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.amount))),
+                        value: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.amount))),
                         data: this.data,
                         chainId: web3.utils.toHex(3)
                     }
                     this.signedTransaction = {
                         from: this.accountAddress,
                         nonce: web3.utils.toHex(count),
-                        gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei')),
+                        gasPrice: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.gasPrice), 'Gwei')),
                         gasLimit: web3.utils.toHex(this.gasLimit),
                         to: this.toAddress,
-                        value: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.amount))),
+                        value: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.amount))),
                         data: this.data,
                         chainId: web3.utils.toHex(3)
                     }
                 } else {
                     let contract = new web3.eth.Contract(abi, this.transferringToken.contractAddress, {
                         from: this.accountAddress,
-                        gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei'))
+                        gasPrice: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.gasPrice), 'Gwei'))
                     })
                     let data = contract.methods.transfer(this.toAddress, this.amount * 1.0 * (10 ** this.transferringToken.decimals)).encodeABI()
                     this.rawTransaction = {
                         nonce: web3.utils.toHex(count),
-                        gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei')),
+                        gasPrice: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.gasPrice), 'Gwei')),
                         // gasLimit: web3.utils.toHex(this.gasLimit),
                         to: this.tokens[0].contractAddress,
                         value: web3.utils.toHex(0),
@@ -135,7 +135,7 @@
                     this.signedTransaction = {
                         from: this.accountAddress,
                         nonce: web3.utils.toHex(count),
-                        gasPrice: web3.utils.toHex(web3.utils.toWei(new web3.utils.BN(this.gasPrice), 'Gwei')),
+                        gasPrice: web3.utils.toHex(web3.utils.toWei(web3.utils.BN(this.gasPrice), 'Gwei')),
                         // gasLimit: web3.utils.toHex(this.gasLimit),
                         to: this.tokens[0].contractAddress,
                         value: web3.utils.toHex(0),
